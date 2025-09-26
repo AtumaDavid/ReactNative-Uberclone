@@ -8,7 +8,7 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 ### ✨ Key Features (Planned/In Development)
 
-- [ ] User Authentication (Sign up, Login, OAuth)
+- [🚧] **User Authentication** - Welcome, Sign Up, Sign In screens implemented
 - [ ] User Profiles (Rider & Driver)
 - [ ] Real-time Location Services
 - [ ] Ride Booking & Matching
@@ -20,7 +20,44 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - [ ] Push Notifications
 - [ ] Multi-language Support
 
-## 🛠 Tech Stack
+**Legend**: ✅ Completed | 🚧 In Progress | [ ] Planned
+
+## � Authentication System
+
+### Implemented Features
+
+- **Welcome Screen**: Onboarding experience with navigation to sign up/sign in
+- **Sign Up Flow**: Complete registration with form validation
+- **Sign In Flow**: User login with credential management
+- **Route Protection**: Automatic redirect to authentication for new users
+- **Navigation Stack**: Structured routing with Expo Router groups
+
+### Authentication Screens
+
+1. **Welcome Screen** (`/(auth)/welcome`)
+   - App introduction and branding
+   - Call-to-action buttons for sign up and sign in
+   - Terms and privacy policy links
+
+2. **Sign Up Screen** (`/(auth)/signup`)
+   - Full name, email, and password registration
+   - Password confirmation validation
+   - Google OAuth integration ready
+   - Navigation to sign in for existing users
+
+3. **Sign In Screen** (`/(auth)/signin`)
+   - Email and password authentication
+   - Forgot password functionality
+   - Google OAuth integration ready
+   - Navigation to sign up for new users
+
+### Route Structure
+
+- **Root Entry**: Automatic redirect to welcome screen for unauthenticated users
+- **Auth Group**: `/(auth)/` - Contains all authentication-related screens
+- **Protected Routes**: `/(root)/` - Main app functionality (post-authentication)
+
+## �🛠 Tech Stack
 
 ### Core Technologies
 
@@ -28,6 +65,7 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **Expo**: ~54.0.9 - Development platform and toolchain
 - **TypeScript**: ~5.9.2 - Type safety and enhanced developer experience
 - **Expo Router**: ~6.0.7 - File-based navigation system
+- **React**: 19.1.0 - Latest React version
 
 ### UI & Styling
 
@@ -35,18 +73,23 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **Tailwind CSS**: ^3.4.17 - Utility-first CSS framework
 - **React Native Reanimated**: ~4.1.0 - Advanced animations
 - **React Native Gesture Handler**: ~2.28.0 - Gesture recognition
+- **Expo Splash Screen**: ~31.0.10 - Native splash screen handling
+- **React Native Safe Area Context**: ~5.6.0 - Safe area handling
 
 ### Navigation & State Management
 
-- **React Navigation**: ^7.1.8 - Navigation library
+- **React Navigation Native**: ^7.1.8 - Navigation library
 - **React Navigation Bottom Tabs**: ^7.4.0 - Tab navigation
 - **React Navigation Elements**: ^2.6.3 - Navigation components
+- **Expo Router**: ~6.0.7 - File-based routing system
 
 ### Development Tools
 
-- **ESLint**: ^9.25.0 - Code linting
-- **Prettier**: Plugin for Tailwind - Code formatting
+- **ESLint**: ^9.25.0 - Code linting with Expo config
+- **Prettier**: ^3.6.2 - Code formatting
+- **Prettier Plugin Tailwind**: ^0.5.14 - Tailwind class sorting
 - **Metro**: Custom configuration for NativeWind
+- **TypeScript**: ~5.9.2 - Static type checking
 
 ## 🚀 Installation & Setup
 
@@ -101,53 +144,22 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 **Configuration Files:**
 
 - **babel.config.js**: Configured with NativeWind preset and Reanimated plugin
-- **tailwind.config.js**: Content paths set for app and components directories with NativeWind preset
+- **tailwind.config.js**: Extended with custom fonts and color palette
 - **metro.config.js**: Enhanced with NativeWind Metro plugin and global CSS input
 - **global.css**: Contains Tailwind directives for base, components, and utilities
 - **nativewind-env.d.ts**: TypeScript definitions for NativeWind
+
+**Custom Configuration:**
+
+- **Custom Fonts**: Plus Jakarta Sans family (Regular, Bold, ExtraBold, ExtraLight, Light, Medium, SemiBold)
+- **Color Palette**: Extended theme with primary, secondary, success, danger, warning, and general color schemes
+- **Content Paths**: Configured for app and components directories
 
 ### TypeScript Configuration
 
 - **tsconfig.json**: Extended from Expo's base configuration
 - **Path Mapping**: `@/*` maps to the root directory
 - **Type Definitions**: Includes NativeWind types via `nativewind-env.d.ts`
-
-## 📁 Project Structure
-
-```
-react-native-uberclone/
-├── app/                    # Main application screens (Expo Router)
-│   ├── (tabs)/            # Tab-based navigation screens
-│   │   ├── _layout.tsx    # Tab layout configuration
-│   │   ├── index.tsx      # Home/Main screen
-│   │   └── explore.tsx    # Explore screen
-│   ├── _layout.tsx        # Root layout configuration
-│   └── modal.tsx          # Modal screens
-├── components/            # Reusable UI components
-│   ├── ui/               # Core UI components
-│   ├── external-link.tsx
-│   ├── haptic-tab.tsx
-│   ├── hello-wave.tsx
-│   ├── parallax-scroll-view.tsx
-│   ├── themed-text.tsx
-│   └── themed-view.tsx
-├── constants/            # App constants and configurations
-│   └── theme.ts         # Theme definitions
-├── hooks/               # Custom React hooks
-│   ├── use-color-scheme.ts
-│   ├── use-color-scheme.web.ts
-│   └── use-theme-color.ts
-├── assets/              # Static assets (images, fonts, etc.)
-│   └── images/
-├── scripts/             # Build and utility scripts
-│   └── reset-project.js
-├── global.css           # Global Tailwind CSS styles
-├── babel.config.js      # Babel configuration
-├── metro.config.js      # Metro bundler configuration
-├── tailwind.config.js   # Tailwind CSS configuration
-├── tsconfig.json        # TypeScript configuration
-└── package.json         # Project dependencies and scripts
-```
 
 ## 🎨 Styling Guidelines
 
@@ -158,11 +170,32 @@ react-native-uberclone/
 - Follow mobile-first responsive design principles
 - Utilize Tailwind's design system for consistency
 
+### Custom Design System
+
+**Fonts Available:**
+
+- `font-Jakarta` - Plus Jakarta Sans Regular
+- `font-JakartaBold` - Plus Jakarta Sans Bold
+- `font-JakartaExtraBold` - Plus Jakarta Sans ExtraBold
+- `font-JakartaLight` - Plus Jakarta Sans Light
+- `font-JakartaMedium` - Plus Jakarta Sans Medium
+- `font-JakartaSemiBold` - Plus Jakarta Sans SemiBold
+
+**Color Palette:**
+
+- **Primary**: `bg-primary-500`, `text-primary-600` (Blue theme)
+- **Secondary**: `bg-secondary-500`, `text-secondary-700` (Gray theme)
+- **Success**: `bg-success-500`, `text-success-600` (Green theme)
+- **Danger**: `bg-danger-500`, `text-danger-600` (Red theme)
+- **Warning**: `bg-warning-500`, `text-warning-600` (Yellow theme)
+- **General**: `bg-general-400`, `text-general-200` (Utility colors)
+
 ### Usage Patterns
 
 - Apply Tailwind classes using the `className` prop on React Native components
-- Use responsive design patterns with mobile-first approach
-- Leverage Tailwind's color palette and spacing system for consistency
+- Use the custom font family classes for consistent typography
+- Leverage the extended color palette for brand consistency
+- Follow the established color naming convention (100-900 scale)
 
 ## 🚦 Development Workflow
 
@@ -172,7 +205,7 @@ react-native-uberclone/
 - `npm run android` - Run on Android device/emulator
 - `npm run ios` - Run on iOS device/simulator
 - `npm run web` - Run on web browser
-- `npm run lint` - Run ESLint for code quality
+- `npm run lint` - Run ESLint for code quality (via expo lint)
 - `npm run reset-project` - Reset to blank project
 
 ### Development Environment
@@ -201,22 +234,43 @@ react-native-uberclone/
 
 > **Note**: This section will be updated regularly as development progresses
 
-### [Version 1.0.0] - Initial Setup
+### [Version 1.0.0] - Initial Setup - ✅ Completed
 
 - ✅ Project initialization with Expo
 - ✅ NativeWind v4 integration
 - ✅ TypeScript configuration
 - ✅ Basic project structure
-- ✅ Tab-based navigation setup
+- ✅ Expo Router setup
 - ✅ Development environment configuration
+- ✅ Custom font integration (Plus Jakarta Sans family)
+- ✅ Splash screen configuration
+- ✅ ESLint and Prettier setup
+- ✅ Custom Tailwind design system (colors & fonts)
+- ✅ Font loading optimization
+
+### [Version 1.1.0] - Authentication System - 🚧 In Progress
+
+- ✅ Route group architecture (`(auth)` and `(root)`)
+- ✅ Welcome screen with onboarding
+- ✅ Sign Up screen with form validation
+- ✅ Sign In screen with authentication flow
+- ✅ Navigation stack configuration
+- ✅ Automatic routing for unauthenticated users
+- [ ] Backend authentication integration
+- [ ] Form validation and error handling
+- [ ] Google OAuth implementation
+- [ ] Persistent user sessions
 
 ### Upcoming Features
 
-- [ ] User authentication system
+- [ ] Complete authentication backend integration
+- [ ] User profile management
 - [ ] Location services integration
 - [ ] Map integration with react-native-maps
 - [ ] Backend API integration
 - [ ] State management setup (Redux/Zustand)
+- [ ] Onboarding flow enhancement
+- [ ] Form validation improvements
 
 ## 🤝 Contributing
 
@@ -247,5 +301,6 @@ This project is for educational purposes. Please respect the intellectual proper
 
 ---
 
-**Last Updated**: September 21, 2025
-**Version**: 1.0.0
+**Last Updated**: September 26, 2025
+**Version**: 1.1.0
+**Status**: Authentication system implemented, backend integration pending
