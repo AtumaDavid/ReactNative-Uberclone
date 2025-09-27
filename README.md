@@ -22,11 +22,12 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 **Legend**: ✅ Completed | 🚧 In Progress | [ ] Planned
 
-## � Authentication System
+## 🔐 Authentication System
 
 ### Implemented Features
 
-- **Welcome Screen**: Onboarding experience with navigation to sign up/sign in
+- **Interactive Onboarding**: Multi-slide welcome experience with swiper navigation
+- **Custom UI Components**: Reusable CustomButton with variant styling
 - **Sign Up Flow**: Complete registration with form validation
 - **Sign In Flow**: User login with credential management
 - **Route Protection**: Automatic redirect to authentication for new users
@@ -34,10 +35,12 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 ### Authentication Screens
 
-1. **Welcome Screen** (`/(auth)/welcome`)
-   - App introduction and branding
-   - Call-to-action buttons for sign up and sign in
-   - Terms and privacy policy links
+1. **Welcome/Onboarding Screen** (`/(auth)/welcome`)
+   - Interactive 3-slide onboarding carousel
+   - Custom swiper with pagination indicators
+   - Dynamic "Next"/"Get Started" button progression
+   - Skip functionality for quick access
+   - High-quality onboarding images and content
 
 2. **Sign Up Screen** (`/(auth)/signup`)
    - Full name, email, and password registration
@@ -82,6 +85,18 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **React Navigation Bottom Tabs**: ^7.4.0 - Tab navigation
 - **React Navigation Elements**: ^2.6.3 - Navigation components
 - **Expo Router**: ~6.0.7 - File-based routing system
+
+### UI Components & Libraries
+
+- **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
+- **Custom Components**: Reusable UI components with TypeScript support
+- **Asset Management**: Organized icons, images, and fonts
+
+### UI Components & Libraries
+
+- **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
+- **Custom Components**: Reusable UI components with TypeScript support
+- **Asset Management**: Organized icons, images, and fonts
 
 ### Development Tools
 
@@ -154,6 +169,8 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - **Custom Fonts**: Plus Jakarta Sans family (Regular, Bold, ExtraBold, ExtraLight, Light, Medium, SemiBold)
 - **Color Palette**: Extended theme with primary, secondary, success, danger, warning, and general color schemes
 - **Content Paths**: Configured for app and components directories
+- **NativeWind Preset**: Properly configured with required preset for v4 compatibility
+- **CSS Integration**: Global CSS import in root layout for proper styling
 
 ### TypeScript Configuration
 
@@ -189,6 +206,16 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - **Danger**: `bg-danger-500`, `text-danger-600` (Red theme)
 - **Warning**: `bg-warning-500`, `text-warning-600` (Yellow theme)
 - **General**: `bg-general-400`, `text-general-200` (Utility colors)
+
+### Custom Components
+
+**CustomButton Component:**
+
+- Multiple variants: primary, secondary, danger, success, outline
+- Icon support (left and right positioning)
+- TypeScript interface with proper typing
+- NativeWind styling integration
+- Reusable across the application
 
 ### Usage Patterns
 
@@ -248,29 +275,41 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - ✅ Custom Tailwind design system (colors & fonts)
 - ✅ Font loading optimization
 
-### [Version 1.1.0] - Authentication System - 🚧 In Progress
+### [Version 1.1.0] - Authentication & Onboarding System - ✅ Completed
 
 - ✅ Route group architecture (`(auth)` and `(root)`)
-- ✅ Welcome screen with onboarding
+- ✅ Interactive onboarding carousel with 3 slides
+- ✅ React Native Swiper integration
+- ✅ Custom reusable UI components (CustomButton)
+- ✅ TypeScript type definitions
 - ✅ Sign Up screen with form validation
 - ✅ Sign In screen with authentication flow
 - ✅ Navigation stack configuration
 - ✅ Automatic routing for unauthenticated users
+- ✅ Asset management (icons, images, fonts)
+- ✅ NativeWind configuration fixes and optimization
+
+### [Version 1.2.0] - Backend Integration - 🚧 Next Phase
+
 - [ ] Backend authentication integration
 - [ ] Form validation and error handling
 - [ ] Google OAuth implementation
 - [ ] Persistent user sessions
+- [ ] User profile management
+- [ ] Enhanced component library
 
 ### Upcoming Features
 
 - [ ] Complete authentication backend integration
-- [ ] User profile management
+- [ ] User profile management and editing
 - [ ] Location services integration
 - [ ] Map integration with react-native-maps
 - [ ] Backend API integration
 - [ ] State management setup (Redux/Zustand)
-- [ ] Onboarding flow enhancement
-- [ ] Form validation improvements
+- [ ] Enhanced form validation with real-time feedback
+- [ ] Push notifications setup
+- [ ] Offline capability and data caching
+- [ ] Advanced component library expansion
 
 ## 🤝 Contributing
 
@@ -301,6 +340,6 @@ This project is for educational purposes. Please respect the intellectual proper
 
 ---
 
-**Last Updated**: September 26, 2025
+**Last Updated**: September 27, 2025
 **Version**: 1.1.0
-**Status**: Authentication system implemented, backend integration pending
+**Status**: Complete authentication & onboarding system with custom components, ready for backend integration
