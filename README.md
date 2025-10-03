@@ -8,7 +8,10 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 ### ✨ Key Features (Planned/In Development)
 
-- [🚧] **User Authentication** - Welcome, Sign Up, Sign In screens implemented
+- [✅] **User Authentication** - Full Clerk authentication with email verification
+- [✅] **Email Verification** - Secure OTP-based email verification
+- [✅] **Session Management** - Persistent user sessions with token caching
+- [✅] **Form Validation** - Comprehensive client-side validation with error alerts
 - [ ] User Profiles (Rider & Driver)
 - [ ] Real-time Location Services
 - [ ] Ride Booking & Matching
@@ -27,11 +30,15 @@ This Uber clone is being developed as a comprehensive learning project to demons
 ### Implemented Features
 
 - **Interactive Onboarding**: Multi-slide welcome experience with swiper navigation
-- **Custom UI Components**: Reusable CustomButton with variant styling
-- **Sign Up Flow**: Complete registration with form validation
-- **Sign In Flow**: User login with credential management
-- **Route Protection**: Automatic redirect to authentication for new users
-- **Navigation Stack**: Structured routing with Expo Router groups
+- **Clerk Authentication**: Enterprise-grade authentication with Clerk
+- **Email Verification**: Secure OTP code verification via email
+- **Session Management**: Persistent sessions with secure token caching
+- **Form Validation**: Real-time validation with user-friendly error alerts
+- **Loading States**: Visual feedback during authentication operations
+- **Custom UI Components**: Reusable components with variant styling
+- **Route Protection**: Automatic auth state checks and redirects
+- **Modal Interactions**: Swipeable and dismissible modals for better UX
+- **OAuth Ready**: Google OAuth integration prepared
 
 ### Authentication Screens
 
@@ -44,21 +51,45 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 2. **Sign Up Screen** (`/(auth)/signup`)
    - Full name, email, and password registration
-   - Password confirmation validation
+   - Real-time form validation (email format, password strength)
+   - Clerk account creation with error handling
+   - Email verification modal with OTP input
+   - Success modal with celebration animation
+   - Loading states with disabled buttons
+   - Dismissible verification modal (swipe down or tap outside)
+   - Auto-redirect if already authenticated
    - Google OAuth integration ready
-   - Navigation to sign in for existing users
 
 3. **Sign In Screen** (`/(auth)/signin`)
    - Email and password authentication
-   - Forgot password functionality
+   - Form validation with error alerts
+   - Clerk session management
+   - Loading states during authentication
+   - Auto-redirect if already authenticated
+   - Error handling for invalid credentials
    - Google OAuth integration ready
-   - Navigation to sign up for new users
 
 ### Route Structure
 
 - **Root Entry**: Automatic redirect to welcome screen for unauthenticated users
 - **Auth Group**: `/(auth)/` - Contains all authentication-related screens
 - **Protected Routes**: `/(root)/` - Main app functionality (post-authentication)
+
+### Authentication Flow
+
+1. **New User Journey**:
+   - Welcome/Onboarding → Sign Up → Email Verification → Success → Home
+
+2. **Returning User Journey**:
+   - Sign In → Auto-redirect to Home (if already signed in)
+
+3. **Security Features**:
+   - Password minimum 8 characters
+   - Email format validation
+   - Secure token storage with expo-secure-store
+   - Session persistence across app restarts
+   - Protected route guards
+   - Error handling with user-friendly alerts
 
 ## �🛠 Tech Stack
 
@@ -86,16 +117,21 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **React Navigation Elements**: ^2.6.3 - Navigation components
 - **Expo Router**: ~6.0.7 - File-based routing system
 
+### Authentication & Security
+
+- **Clerk Expo**: Latest - Complete authentication solution
+- **Expo Secure Store**: Latest - Secure token storage
+- **Token Caching**: Secure session persistence
+- **OAuth Ready**: Google authentication prepared
+
 ### UI Components & Libraries
 
 - **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
+- **React Native Modal**: Latest - Advanced modal components
 - **Custom Components**: Reusable UI components with TypeScript support
-- **Asset Management**: Organized icons, images, and fonts
-
-### UI Components & Libraries
-
-- **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
-- **Custom Components**: Reusable UI components with TypeScript support
+- **InputField**: Custom input with validation and icons
+- **CustomButton**: Multi-variant button with loading states
+- **OAuth**: Social authentication component
 - **Asset Management**: Organized icons, images, and fonts
 
 ### Development Tools
@@ -280,7 +316,7 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - ✅ Route group architecture (`(auth)` and `(root)`)
 - ✅ Interactive onboarding carousel with 3 slides
 - ✅ React Native Swiper integration
-- ✅ Custom reusable UI components (CustomButton)
+- ✅ Custom reusable UI components (CustomButton, InputField)
 - ✅ TypeScript type definitions
 - ✅ Sign Up screen with form validation
 - ✅ Sign In screen with authentication flow
@@ -289,13 +325,30 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - ✅ Asset management (icons, images, fonts)
 - ✅ NativeWind configuration fixes and optimization
 
-### [Version 1.2.0] - Backend Integration - 🚧 Next Phase
+### [Version 1.2.0] - Clerk Authentication Integration - ✅ Completed
 
-- [ ] Backend authentication integration
-- [ ] Form validation and error handling
+- ✅ Clerk Expo SDK integration
+- ✅ Email/password authentication
+- ✅ Email verification with OTP codes
+- ✅ Secure token caching with expo-secure-store
+- ✅ Session management and persistence
+- ✅ Form validation with error alerts
+- ✅ Loading states and user feedback
+- ✅ Success modals with animations
+- ✅ Dismissible verification modals
+- ✅ Auto-redirect for authenticated users
+- ✅ Error handling for all auth operations
+- ✅ React Native Modal integration
+- ✅ OAuth component preparation
+- ✅ Protected route guards
+
+### [Version 1.3.0] - OAuth & User Profiles - 🚧 Next Phase
+
 - [ ] Google OAuth implementation
-- [ ] Persistent user sessions
-- [ ] User profile management
+- [ ] User profile creation and management
+- [ ] Profile picture upload
+- [ ] Database integration for user data
+- [ ] Account settings screen
 - [ ] Enhanced component library
 
 ### Upcoming Features
@@ -340,6 +393,6 @@ This project is for educational purposes. Please respect the intellectual proper
 
 ---
 
-**Last Updated**: September 27, 2025
-**Version**: 1.1.0
-**Status**: Complete authentication & onboarding system with custom components, ready for backend integration
+**Last Updated**: October 3, 2025
+**Version**: 1.2.0
+**Status**: Full authentication system with Clerk, email verification, session management, and enhanced UX features
