@@ -12,6 +12,9 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - [✅] **Email Verification** - Secure OTP-based email verification
 - [✅] **Session Management** - Persistent user sessions with token caching
 - [✅] **Form Validation** - Comprehensive client-side validation with error alerts
+- [✅] **PostgreSQL Database** - Local database with auto-initialization
+- [✅] **User API** - RESTful API for user management with Clerk integration
+- [✅] **Tab Navigation** - Liquid glass effect tab bar with custom styling
 - [ ] User Profiles (Rider & Driver)
 - [ ] Real-time Location Services
 - [ ] Ride Booking & Matching
@@ -107,6 +110,7 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **Tailwind CSS**: ^3.4.17 - Utility-first CSS framework
 - **React Native Reanimated**: ~4.1.0 - Advanced animations
 - **React Native Gesture Handler**: ~2.28.0 - Gesture recognition
+- **Expo Blur**: ~15.0.7 - Blur view component for frosted glass effects
 - **Expo Splash Screen**: ~31.0.10 - Native splash screen handling
 - **React Native Safe Area Context**: ~5.6.0 - Safe area handling
 
@@ -119,19 +123,28 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 ### Authentication & Security
 
-- **Clerk Expo**: Latest - Complete authentication solution
-- **Expo Secure Store**: Latest - Secure token storage
-- **Token Caching**: Secure session persistence
+- **Clerk Expo**: ^2.16.0 - Complete authentication solution with email verification
+- **Expo Secure Store**: ^15.0.7 - Secure token storage and caching
+- **Token Caching**: Secure session persistence across app restarts
 - **OAuth Ready**: Google authentication prepared
+
+### Database & Backend
+
+- **PostgreSQL**: ^8.16.3 (pg) - Local database for user data
+- **@types/pg**: ^8.15.5 - TypeScript definitions for PostgreSQL
+- **Connection Pooling**: Efficient database connection management
+- **Auto-initialization**: Automatic table creation on first API call
+- **Expo API Routes**: Built-in API route handling with +api.ts files
 
 ### UI Components & Libraries
 
 - **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
-- **React Native Modal**: Latest - Advanced modal components
+- **React Native Modal**: ^14.0.0-rc.1 - Advanced modal components with swipe gestures
 - **Custom Components**: Reusable UI components with TypeScript support
 - **InputField**: Custom input with validation and icons
 - **CustomButton**: Multi-variant button with loading states
 - **OAuth**: Social authentication component
+- **TabIcon**: Custom tab icons with liquid glass effect
 - **Asset Management**: Organized icons, images, and fonts
 
 ### Development Tools
@@ -149,6 +162,7 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - Node.js (18+ recommended)
 - npm or yarn
 - Expo CLI
+- PostgreSQL (local installation)
 - Android Studio (for Android development)
 - Xcode (for iOS development, macOS only)
 
@@ -167,13 +181,37 @@ This Uber clone is being developed as a comprehensive learning project to demons
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up PostgreSQL Database**
+
+   ```bash
+   # Create database (Linux/macOS)
+   sudo -u postgres psql
+   CREATE DATABASE "Uber-clone";
+   \q
+   ```
+
+   For detailed database setup instructions, see [`database/README.md`](database/README.md)
+
+4. **Configure Environment Variables**
+
+   ```bash
+   # Copy the example file
+   cp .env.example .env
+
+   # Edit .env and add your credentials:
+   # - EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+   # - DATABASE_URL
+   ```
+
+5. **Start the development server**
 
    ```bash
    npx expo start
    ```
 
-4. **Run on specific platforms**
+   The database tables will be created automatically on first API call.
+
+6. **Run on specific platforms**
 
    ```bash
    # Android
@@ -185,6 +223,42 @@ This Uber clone is being developed as a comprehensive learning project to demons
    # Web
    npm run web
    ```
+
+## 🗄️ Database Architecture
+
+### PostgreSQL Setup
+
+The app uses a local PostgreSQL database with automatic initialization.
+
+**Key Features:**
+
+- **Auto-initialization**: Tables are created automatically on first API call
+- **Connection Pooling**: Efficient database connection management (max 20 connections)
+- **Indexed Queries**: Optimized with indexes on clerk_id and email
+- **Automatic Timestamps**: updated_at field updated via database triggers
+- **TypeScript Integration**: Full type safety with @types/pg
+
+**Database Schema:**
+
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  clerk_id VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  profile_image_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**API Endpoints:**
+
+- `POST /api/user` - Create new user with Clerk integration
+- `GET /api/user?clerkId=xxx` - Fetch user by Clerk ID
+- `GET /api/user?email=xxx` - Fetch user by email
+
+For detailed setup instructions, see [`database/README.md`](database/README.md)
 
 ## ⚙️ Configuration Details
 
@@ -342,27 +416,45 @@ The project uses NativeWind v4 for styling, which provides Tailwind CSS utilitie
 - ✅ OAuth component preparation
 - ✅ Protected route guards
 
-### [Version 1.3.0] - OAuth & User Profiles - 🚧 Next Phase
+### [Version 1.3.0] - Database Integration & Navigation - ✅ Completed
+
+- ✅ PostgreSQL database integration with node-postgres (pg)
+- ✅ Database connection pooling for efficient queries
+- ✅ Auto-initialization system (tables created automatically)
+- ✅ User API endpoints (POST /api/user, GET /api/user)
+- ✅ Database migration files with proper schema
+- ✅ Automatic timestamp triggers for updated_at field
+- ✅ Comprehensive database documentation
+- ✅ Tab navigation with liquid glass effect
+- ✅ Custom tab bar styling with blur effects
+- ✅ Centered tab icons with active state styling
+- ✅ Protected route configuration
+- ✅ Loading state on app initialization
+
+### [Version 1.4.0] - OAuth & User Profiles - 🚧 Next Phase
 
 - [ ] Google OAuth implementation
 - [ ] User profile creation and management
 - [ ] Profile picture upload
-- [ ] Database integration for user data
+- [ ] Complete Clerk-to-Database user sync
 - [ ] Account settings screen
 - [ ] Enhanced component library
 
 ### Upcoming Features
 
-- [ ] Complete authentication backend integration
 - [ ] User profile management and editing
-- [ ] Location services integration
+- [ ] Driver profile creation and verification
+- [ ] Location services integration with expo-location
 - [ ] Map integration with react-native-maps
-- [ ] Backend API integration
+- [ ] Ride booking system with real-time matching
 - [ ] State management setup (Redux/Zustand)
 - [ ] Enhanced form validation with real-time feedback
-- [ ] Push notifications setup
+- [ ] Push notifications with expo-notifications
 - [ ] Offline capability and data caching
 - [ ] Advanced component library expansion
+- [ ] Payment integration (Stripe/PayPal)
+- [ ] Real-time chat with Socket.io
+- [ ] Trip tracking and history
 
 ## 🤝 Contributing
 
@@ -384,6 +476,12 @@ This project is for educational purposes. Please respect the intellectual proper
 1. **Metro bundler issues**: Clear cache with `npx expo start --clear`
 2. **NativeWind not working**: Ensure all configuration files are properly set up
 3. **TypeScript errors**: Check `tsconfig.json` and type definitions
+4. **Database connection errors**:
+   - Ensure PostgreSQL is running: `sudo systemctl status postgresql`
+   - Check DATABASE_URL in .env file
+   - Verify database exists: `sudo -u postgres psql -l`
+5. **Port conflicts**: Use `npx expo start --port 8082` if port 8081 is in use
+6. **Authentication flow issues**: Clear Clerk cache and restart Expo server
 
 ### Getting Help
 
@@ -391,8 +489,43 @@ This project is for educational purposes. Please respect the intellectual proper
 - Visit [NativeWind Documentation](https://www.nativewind.dev/)
 - React Native [Community Resources](https://reactnative.dev/community/overview)
 
+## 📚 Documentation
+
+- **Database Setup**: [`database/README.md`](database/README.md) - Complete PostgreSQL setup guide
+- **API Routes**: User management endpoints with auto-initialization
+- **Environment Variables**: `.env.example` - Required configuration template
+
+## 🎯 Project Structure
+
+```
+react-native-uberclone/
+├── app/
+│   ├── (api)/              # API routes
+│   │   └── user+api.ts     # User management endpoints
+│   ├── (auth)/             # Authentication screens
+│   │   ├── welcome.tsx     # Onboarding carousel
+│   │   ├── signup.tsx      # User registration
+│   │   └── signin.tsx      # User login
+│   ├── (root)/             # Protected routes
+│   │   └── (tabs)/         # Tab navigation
+│   │       ├── home.tsx
+│   │       ├── Rides.tsx
+│   │       ├── Chat.tsx
+│   │       └── Profile.tsx
+│   ├── _layout.tsx         # Root layout with Clerk provider
+│   └── index.tsx           # Entry point with auth check
+├── lib/
+│   └── db.ts               # Database connection and utilities
+├── database/
+│   ├── README.md           # Database setup guide
+│   └── migrations/         # SQL migration files
+├── components/             # Reusable UI components
+├── constants/              # App constants and config
+└── assets/                 # Images, icons, fonts
+```
+
 ---
 
-**Last Updated**: October 3, 2025
-**Version**: 1.2.0
-**Status**: Full authentication system with Clerk, email verification, session management, and enhanced UX features
+**Last Updated**: October 12, 2025
+**Version**: 1.3.0
+**Status**: Full-stack authentication with PostgreSQL database, auto-initialization, user API, and enhanced navigation with liquid glass tab bar

@@ -2,6 +2,7 @@ import CustomButton from '@/components/customButton';
 import { InputField } from '@/components/InputField';
 import OAuth from '@/components/OAuth';
 import { icons, images } from '@/constants';
+import { fetchAPI } from '@/lib/fetch';
 import { useAuth, useSignUp } from '@clerk/clerk-expo';
 import { Link, Redirect, useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -119,6 +120,17 @@ const SignUp = () => {
       // and redirect the user
       if (signUpAttempt.status === 'complete') {
         // TODO: Create a database user
+        await fetchAPI('/(api)/user', {
+          method: 'POST',
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: signUpAttempt.createdSessionId,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         await setActive({ session: signUpAttempt.createdSessionId });
         setIsLoading(false);
         setPendingVerification(false);

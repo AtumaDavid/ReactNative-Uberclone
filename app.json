@@ -25,12 +25,13 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
+      // "output": "static",
+      "output": "server",
       "favicon": "./assets/images/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router",
+      ["expo-router", { "origin": "https://uber.com/" }],
       [
         "expo-splash-screen",
         {
