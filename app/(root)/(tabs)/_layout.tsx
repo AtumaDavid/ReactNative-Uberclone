@@ -13,24 +13,26 @@ const TabIcon = ({
   <View className="flex items-center justify-center w-16 h-16">
     <View
       className={`items-center justify-center rounded-full ${
-        focused ? 'bg-white/15 border border-white/30' : ''
+        focused ? 'bg-general-400' : ''
       }`}
       style={{
         width: 55,
         height: 55,
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: focused ? '#ffffff' : 'transparent',
-        shadowOpacity: focused ? 0.25 : 0,
-        shadowRadius: focused ? 6 : 0,
+        borderWidth: focused ? 2 : 0,
+        borderColor: focused ? 'rgba(255, 255, 255, 0.4)' : 'transparent',
+        shadowColor: focused ? '#fff' : 'transparent',
+        shadowOpacity: focused ? 0.4 : 0,
+        shadowRadius: focused ? 10 : 0,
         shadowOffset: { width: 0, height: 0 },
-        elevation: focused ? 6 : 0,
+        elevation: focused ? 8 : 0,
       }}
     >
       <Image
         source={source}
         resizeMode="contain"
-        tintColor={focused ? '#ffffff' : 'rgba(255,255,255,0.6)'}
+        tintColor={focused ? '#ffffff' : 'rgba(0, 0, 0, 0.5)'}
         style={{
           width: 28,
           height: 28,
@@ -51,13 +53,14 @@ const Layout = () => (
       tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.6)',
       tabBarBackground: () => (
         <BlurView
-          intensity={70}
-          tint="dark"
+          intensity={10} // Very low intensity for clear glass effect
+          tint="default" // Neutral tint to avoid any color overlay
           style={{
             flex: 1,
             borderRadius: 40,
             overflow: 'hidden',
-            backgroundColor: 'rgba(25, 25, 25, 0.25)', // adds a subtle glass tint
+            backgroundColor: 'rgba(0, 0, 0, 0)', // Fully transparent
+            borderWidth: 0, // No border
           }}
         />
       ),
@@ -66,17 +69,12 @@ const Layout = () => (
         bottom: 28,
         left: 20,
         right: 20,
-        height: 88,
+        // height: 88,
         borderRadius: 40,
         paddingVertical: 10,
-        backgroundColor: 'rgba(25, 25, 25, 0.25)', // fallback for Android
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.15)',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.25,
-        shadowRadius: 12,
-        elevation: 12,
+        backgroundColor: 'rgba(0, 0, 0, 0)', // Completely transparent
+        borderWidth: 1, // No border
+        elevation: 10, // No shadow
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
