@@ -114,6 +114,13 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **Auto-initialization**: Automatic table creation on first API call
 - **Expo API Routes**: Built-in API route handling with +api.ts files
 
+### Maps & Location Services
+
+- **React Native Maps**: Expo-compatible maps integration
+- **React Native Maps Directions**: ^1.9.0 - Route rendering and directions
+- **Google Maps API**: Integrated via Expo config plugin
+- **Geoapify API**: Geocoding and place search services
+
 ### UI Components & Libraries
 
 - **React Native Swiper**: ^1.6.0 - Interactive carousel/swiper component
@@ -123,6 +130,7 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - **CustomButton**: Multi-variant button with loading states
 - **OAuth**: Social authentication component
 - **TabIcon**: Custom tab icons with liquid glass effect
+- **Map**: Custom map component with Google Maps integration
 - **Asset Management**: Organized icons, images, and fonts
 
 ### Development Tools
@@ -144,6 +152,34 @@ This Uber clone is being developed as a comprehensive learning project to demons
 - Android Studio (for Android development)
 - Xcode (for iOS development, macOS only)
 
+### Package Installation Commands
+
+All required packages and dependencies for this project:
+
+```bash
+# Core dependencies
+npm install
+
+# Maps & Location Services
+npx expo install react-native-maps
+npm install react-native-maps-directions
+
+# Authentication & Security
+npm install @clerk/clerk-expo expo-secure-store
+
+# UI & Styling
+npm install nativewind tailwindcss
+npm install react-native-swiper
+npm install react-native-modal
+
+# Database
+npm install pg @types/pg
+
+# Development Tools
+npm install --save-dev prettier prettier-plugin-tailwindcss
+npm install --save-dev eslint eslint-config-expo eslint-config-prettier eslint-plugin-prettier
+```
+
 ### Installation Steps
 
 1. **Clone the repository**
@@ -153,13 +189,20 @@ This Uber clone is being developed as a comprehensive learning project to demons
    cd react-native-uberclone
    ```
 
-2. **Install dependencies**
+2. **Install all dependencies**
 
    ```bash
    npm install
    ```
 
-3. **Set up PostgreSQL Database**
+3. **Install Maps Packages**
+
+   ```bash
+   npx expo install react-native-maps
+   npm install react-native-maps-directions
+   ```
+
+4. **Set up PostgreSQL Database**
 
    ```bash
    # Create database (Linux/macOS)
@@ -172,13 +215,25 @@ This Uber clone is being developed as a comprehensive learning project to demons
 
 ## APIs & Map Services
 
-This project uses external APIs for map and place-search functionality. Geoapify is the primary provider used for geocoding, reverse geocoding, and places/autocomplete during development.
+This project uses external APIs for map and place-search functionality. Both Google Maps and Geoapify are integrated for comprehensive location services.
 
-Summary (no code)
+### Google Maps Integration
 
-- Rationale: Geoapify provides a simple, well-documented REST API for geocoding and places/autocomplete, which makes it convenient for prototyping and early development.
-- Keys: Store API keys in a local `.env` file and do not commit them to source control. The project expects a client-safe key under `EXPO_PUBLIC_GEOAPIFY_KEY`. For private or high-rate operations, use a server-side key behind a proxy.
-- Best practices: Debounce user-driven place lookups (autocomplete), cache popular responses locally, and monitor usage/quotas from the Geoapify dashboard.
+- **Setup**: Configured via Expo config plugin in `app.json`
+- **Components**: React Native Maps with Google Maps provider
+- **Features**: Map rendering, markers, polylines, and region controls
+- **API Key**: Set `EXPO_PUBLIC_GOOGLE_API_KEY` in `.env` file
+- **Installation**: Use `npx expo install react-native-maps` for Expo-compatible version
+
+### Geoapify Integration
+
+- **Primary Use**: Geocoding, reverse geocoding, and places/autocomplete during development
+- **Rationale**: Provides a simple, well-documented REST API for location services
+- **API Key**: Set `EXPO_PUBLIC_GEOAPIFY_API_KEY` in `.env` file
+- **Best Practices**:
+  - Debounce user-driven place lookups (autocomplete)
+  - Cache popular responses locally
+  - Monitor usage/quotas from the Geoapify dashboard
 
 For more details about quotas and account management, visit your Geoapify project dashboard.
 

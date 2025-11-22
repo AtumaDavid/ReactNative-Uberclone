@@ -14,7 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.atumad.uber",
+      "config": {
+        "googleMapsApiKey": "AIzaSyASAT6_F6mWUnFG7qu4DJofk9b6TZqmE8o"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -22,16 +26,26 @@
         "foregroundImage": "./assets/images/adaptive-icon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.atumad.uber",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyASAT6_F6mWUnFG7qu4DJofk9b6TZqmE8o"
+        }
+      }
     },
     "web": {
-      // "output": "static",
       "output": "server",
       "favicon": "./assets/images/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
-      ["expo-router", { "origin": "https://uber.com/" }],
+      [
+        "expo-router",
+        {
+          "origin": "https://uber.com/"
+        }
+      ],
       [
         "expo-splash-screen",
         {

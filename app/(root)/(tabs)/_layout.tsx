@@ -12,8 +12,8 @@ const TabIcon = ({
 }) => (
   <View className="flex items-center justify-center w-16 h-16">
     <View
-      className={`items-center justify-center rounded-full ${
-        focused ? 'bg-general-400' : ''
+      className={`items-center justify-center rounded-full border ${
+        focused ? 'bg-general-400 ' : ''
       }`}
       style={{
         width: 55,
@@ -21,11 +21,11 @@ const TabIcon = ({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: focused ? 2 : 0,
-        borderColor: focused ? 'rgba(255, 255, 255, 0.4)' : 'transparent',
-        shadowColor: focused ? '#fff' : 'transparent',
-        shadowOpacity: focused ? 0.4 : 0,
-        shadowRadius: focused ? 10 : 0,
-        shadowOffset: { width: 0, height: 0 },
+        borderColor: focused ? 'rgba(255, 255, 255, 1)' : 'transparent',
+        // shadowColor: focused ? '#fff' : 'transparent',
+        // shadowOpacity: focused ? 0.4 : 0,
+        // shadowRadius: focused ? 10 : 0,
+        // shadowOffset: { width: 0, height: 0 },
         elevation: focused ? 8 : 0,
       }}
     >

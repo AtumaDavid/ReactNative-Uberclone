@@ -122,16 +122,19 @@ export default function Page() {
       </SignedOut> */}
       <FlatList
         data={recentRides.slice(0, 5)}
+        // data={[]}
         renderItem={({ item }) => <RideCard ride={item} />}
         className="px-5 "
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingBottom: 100 }}
         ListHeaderComponent={() => (
           <>
-            <View className="flex flex-row items-center justify-between my-5 capitalize">
-              <Text>
+            <View className="flex flex-row items-center justify-between my-5  ">
+              <Text className="text-2xl font-bold capitalize">
                 Welcome,{' '}
-                {user?.firstName || user?.emailAddresses[0].emailAddress}
+                {/* {user?.firstName || user?.emailAddresses[0].emailAddress} */}
+                {user?.firstName ||
+                  user?.emailAddresses[0].emailAddress.split('@')[0]}
               </Text>
               <TouchableOpacity
                 onPress={handleSignOut}
@@ -146,14 +149,18 @@ export default function Page() {
               containerStyle="bg-white shadow-md shadow-neutral-300"
               handlePress={handleDestinationPress}
             />
+
+            {/* current location */}
             <>
               <Text className="text-xl font-JakartaBold mt-5 mb-3">
                 Your current location
               </Text>
-              <View className="flex flex-row bg-transparent h-[300px]">
+              <View className=" bg-transparent h-[300px]">
                 <Map />
               </View>
             </>
+
+            {/* recent rides */}
             <Text className="text-xl font-JakartaBold mt-5 mb-3">
               Recent Rides
             </Text>
