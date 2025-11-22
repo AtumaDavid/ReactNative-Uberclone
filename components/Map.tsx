@@ -10,12 +10,26 @@
 //   );
 // }
 
+import { calculateRegion } from '@/lib/map';
+import { useLocationStore } from '@/store';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_DEFAULT } from 'react-native-maps';
 
 export default function Map() {
-  // const region = {}
+  const {
+    userLatitude,
+    userLongitude,
+    destinationLatitude,
+    destinationLongitude,
+  } = useLocationStore();
+
+  const region = calculateRegion({
+    userLatitude,
+    userLongitude,
+    destinationLatitude,
+    destinationLongitude,
+  });
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
@@ -24,7 +38,7 @@ export default function Map() {
       tintColor="black"
       // mapType="mutedStandard"
       showsPointsOfInterest={false}
-      // initialRegion={region}
+      initialRegion={region}
       showsUserLocation={true}
       userInterfaceStyle="light"
     />

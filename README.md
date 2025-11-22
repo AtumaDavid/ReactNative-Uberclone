@@ -163,6 +163,7 @@ npm install
 # Maps & Location Services
 npx expo install react-native-maps
 npm install react-native-maps-directions
+npx expo install expo-location
 
 # Authentication & Security
 npm install @clerk/clerk-expo expo-secure-store
@@ -172,6 +173,9 @@ npm install nativewind tailwindcss
 npm install react-native-swiper
 npm install react-native-modal
 
+# State Management
+npm install zustand
+
 # Database
 npm install pg @types/pg
 
@@ -179,6 +183,8 @@ npm install pg @types/pg
 npm install --save-dev prettier prettier-plugin-tailwindcss
 npm install --save-dev eslint eslint-config-expo eslint-config-prettier eslint-plugin-prettier
 ```
+
+Note: exact package versions are recorded in `package.json`. Use `npx expo install` for Expo-managed native packages (for example `react-native-maps` and `expo-location`) so Expo picks a compatible native version.
 
 ### Installation Steps
 
